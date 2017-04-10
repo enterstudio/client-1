@@ -13,6 +13,7 @@ import (
 	"net/http"
 	"net/url"
 	"runtime"
+	"runtime/debug"
 	"strings"
 	"sync"
 	"time"
@@ -227,6 +228,7 @@ func doRequestShared(api Requester, arg APIArg, req *http.Request, wantJSONRes b
 	}
 	ctx = WithLogTag(ctx, "API")
 	api.G().Log.CDebugf(ctx, "+ API %s %s", req.Method, req.URL)
+	debug.PrintStack()
 
 	var jsonBytes int
 	var status string
